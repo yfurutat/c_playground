@@ -1,3 +1,3 @@
 # MY_CTYPE
 
-tried playful exploration on ctype.h funcs.
+tried a playful exploration on <ctype.h> funcs.
