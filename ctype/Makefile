@@ -7,7 +7,7 @@ OBJS	=	$(SRCS:.c=.o)
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
-NAME	=	get_next_line.a
+NAME	=	my_ctype.a
 
 RM		=	rm -f
 AR		=	ar -rcs
@@ -20,7 +20,7 @@ $(NAME)	:	$(OBJS)
 
 all		:	$(NAME)
 out		:	all
-			$(CC) $(CFLAGS) $(NAME) $(MAIN) ; time ./$(OUT)
+			$(CC) $(CFLAGS) $(NAME) $(MAIN) ; time ./$(OUT) | cat -e
 
 clean	:	
 			$(RM) $(OBJS)
@@ -32,17 +32,11 @@ oclean	:	fclean
 			$(RM) $(OUT)
 
 re		:	fclean all
-ore		:	fclean out
+ore		:	oclean out
 
-norm	:	
-			@norminette $(HFILE) $(SRCS)
-normd	:
-			@norminette -R CheckDefine $(HFILE) $(SRCS)
-normf	:
-			@norminette -R CheckForbiddenSourceHeader $(HFILE) $(SRCS)
-commit	:	fclean
+commit	:	oclean
 			git add .
 			git commit -m "commit through Makefile"
 			git log
 
-.PHONY	:	all out clean fclean oclean re ore norm normd normf commit
+.PHONY	:	all out clean fclean oclean re ore commit
